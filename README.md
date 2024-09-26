@@ -60,3 +60,10 @@ Start the development server:
 ```
 npm run start
 ```
+
+## Login
+An admin user is seeded for access to the system with the following credentials:
+```
+username: admin@hr.com
+password: 123
+```
