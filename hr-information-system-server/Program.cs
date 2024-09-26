@@ -4,6 +4,7 @@ using hr_information_system_server.Data;
 using hr_information_system_server.Repositories;
 using hr_information_system_server.Interfaces;
 using Microsoft.OpenApi.Models;
+using hr_information_system_server.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,8 @@ using (var scope = app.Services.CreateScope())
 {
     var dBContext = scope.ServiceProvider.GetRequiredService<HRInformationSystemContext>();
     dBContext.Database.Migrate();
+    // Seed initial data
+    SeedData(dBContext);
 }
 
 // Configure the HTTP request pipeline.
@@ -68,3 +71,30 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+// Seed data method
+void SeedData(HRInformationSystemContext context)
+{
+    // Check if the database is already seeded with an admin
+    if (!context.Employees.Any())
+    {
+        context.Employees.AddRange(
+            new Employee
+            {
+                Id = 0,
+                FirstName = "Admin",
+                LastName = "User",
+                Email = "admin@hr.com",
+                PhoneNumber = "8765412013",
+                Position = "Admin",
+                DateOfHire = DateTime.Now.AddDays(-10),
+                Salary = 1000000,
+                IsHRAdmin = true,
+                Password = "123"
+            }
+        );
+
+        context.SaveChanges(); // Save the seeded data to the database
+    }
+}
