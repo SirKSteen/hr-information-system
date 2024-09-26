@@ -50,6 +50,8 @@ Navigate to the frontend project directory:
 cd hr-information-system
 ```
 
+Make a copy of the .env.template file and rename it to .env
+
 Install dependencies:
 ```
 npm install
