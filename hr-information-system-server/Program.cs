@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using hr_information_system_server.Data;
 using hr_information_system_server.Repositories;
 using hr_information_system_server.Interfaces;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,12 +29,14 @@ builder.Services.AddCors(options =>
             .AllowCredentials());
 });
 
-
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IReportRepository, ReportRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "HR Information System API", Version = "v1" });
+});
 
 var app = builder.Build();
 
@@ -50,7 +53,10 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "HR Information System API v1");
+    });
 }
 
 app.UseHttpsRedirection();

@@ -10,8 +10,8 @@ using System.Text;
 
 namespace hr_information_system_server.Controllers
 {
-    [Route("api/authenticate")]
     [ApiController]
+    [Route("api/authenticate")]
     public class AuthenticationController : ControllerBase
     {
         private readonly HRInformationSystemContext _context;

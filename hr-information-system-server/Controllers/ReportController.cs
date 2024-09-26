@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace hr_information_system_server.Controllers
 {
-    [Route("api/report")]
     [ApiController]
+    [Route("api/report")]
     public class ReportController : ControllerBase
     {
         private readonly HRInformationSystemContext _context;
