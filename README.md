@@ -35,7 +35,7 @@ Server setup:
 ### Frontend (React + TypeScript)
 Navigate to the frontend project directory:
 ```
-cd hr-information-system
+cd hr-information-system-ui
 ```
 
 UI setup:
