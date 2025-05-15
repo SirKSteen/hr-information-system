@@ -8,12 +8,12 @@ A streamlined HR Information System designed to manage employee data and generat
 * User authentication with username and password management.
 * Automatic password generation for newly created employees, displayed via toast notifications.
 * Multiple employee deletion functionality.
+
 ### Two types of PDF reports:
 * A pie chart showing the total number of employees.
 * A table displaying employees hired within the last 30 days.
   
 HR Administrators can manage all employee data and generate reports, while standard employees are restricted to viewing records only. Users cannot delete their own account and can update their passwords.
-
 
 ## Setup Instructions
 ### Backend (ASP.NET Web API)
@@ -22,26 +22,14 @@ Clone the repository:
 git clone https://github.com/SirKSteen/hr-information-system.git
 ```
 
-Navigate to the backend project directory:
+Navigate to the server-side project directory:
 ```
 cd hr-information-system-server
 ```
 
-Install dependencies:
+Server setup:
 ```
-dotnet restore
-```
-
-Run database migrations:
-```
-dotnet ef database update
-```
-
-Make a copy of the .env.template file and rename it to .env
-
-Run the backend server:
-```
-dotnet run
+./server-setup.sh
 ```
 
 ### Frontend (React + TypeScript)
@@ -50,15 +38,9 @@ Navigate to the frontend project directory:
 cd hr-information-system
 ```
 
-Make a copy of the .env.template file and rename it to .env
-
-Install dependencies:
+UI setup:
 ```
-npm install
-```
-Start the development server:
-```
-npm run start
+./ui-setup.sh
 ```
 
 ## Login

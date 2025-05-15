@@ -10,14 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Load .env file
 DotNetEnv.Env.Load();
-var connectionString = Environment.GetEnvironmentVariable("DefaultConnection");
 var HR_INFORMATION_SYSTEM_UI_ORIGIN = Environment.GetEnvironmentVariable("HR_INFORMATION_SYSTEM_UI_ORIGIN");
 
 // Add services to the container.
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<HRInformationSystemContext>(options =>
-    options.UseSqlServer(connectionString));
+{
+    options.UseInMemoryDatabase("DemoDatabase");
+});
 
 // Add CORS policy
 builder.Services.AddCors(options =>
@@ -46,10 +47,10 @@ app.UseRouting();
 // Apply migrations and create the database
 using (var scope = app.Services.CreateScope())
 {
-    var dBContext = scope.ServiceProvider.GetRequiredService<HRInformationSystemContext>();
-    dBContext.Database.Migrate();
+    var context = scope.ServiceProvider.GetRequiredService<HRInformationSystemContext>();
+    context.Database.EnsureCreated();
     // Seed initial data
-    SeedData(dBContext);
+    SeedData(context);
 }
 
 // Configure the HTTP request pipeline.
